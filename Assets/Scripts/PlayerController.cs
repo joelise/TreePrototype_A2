@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,5 +39,15 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = Camera.main.ScreenToWorldPoint(screenPos);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Leaf"))
+        {
+            gameManager.CaughtLeaf(other.gameObject);
+            Debug.Log("Caught");
+
+        }
     }
 }
