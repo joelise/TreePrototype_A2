@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -18,7 +19,9 @@ public class GameManager : MonoBehaviour
     public bool HasSpawned;
     public float timer = 0f;
     public BoxCollider MissBox;
-
+    public ScoreUI UI;
+    
+    
     
 
 
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
         CurrentHealth = StartHealth;
         Alive = true;
         Score = StartingScore;
+        //UpdateScoreText();
     }
 
     // Update is called once per frame
@@ -52,6 +56,8 @@ public class GameManager : MonoBehaviour
         {
             Alive = false;
             GameEnd();
+            UI.Show();
+            Time.timeScale = 0;
         }
        
         
@@ -93,9 +99,15 @@ public class GameManager : MonoBehaviour
     public void CaughtLeaf(GameObject leaf)
     {
         Score++;
+        //UpdateScoreText();
         Destroy(leaf);
         Debug.Log("Plus 1");
     
+    }
+
+    public void UpdateScoreText()
+    {
+        
     }
 
 }
