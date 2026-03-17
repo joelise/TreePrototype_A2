@@ -14,13 +14,18 @@ public class GameManager : MonoBehaviour
     public int StartingScore = 0;
 
     [Header("Leaves")]
-    public BoxCollider SpawnArea;
+    //public BoxCollider SpawnArea;
     public GameObject Leaf;
     public bool HasSpawned;
     public float timer = 0f;
     public BoxCollider MissBox;
-    public ScoreUI UI;
-    
+    //public ScoreUI UI;
+
+    //public SpawnArea spawnArea;
+    public LeafSpawnArea spawnArea;
+    public Transform playerTransform;
+    public float InnerRadius = 2f;
+    public float OuterRadius = 2f;
     
     
 
@@ -56,7 +61,7 @@ public class GameManager : MonoBehaviour
         {
             Alive = false;
             GameEnd();
-            UI.Show();
+            //UI.Show();
             Time.timeScale = 0;
         }
        
@@ -75,8 +80,11 @@ public class GameManager : MonoBehaviour
 
     public void SpawnInArea()
     {
-        Vector3 randomPoint = RandomSpawnPoint(SpawnArea);
-        Instantiate(Leaf, randomPoint, Quaternion.identity);
+        //Vector3 randomPoint = RandomSpawnPoint(SpawnArea);
+        Vector3 dir = playerTransform.position - spawnArea.transform.position;
+        float playerAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        Vector3 spawnPos = spawnArea.GetSpawnPoint(playerAngle);
+        Instantiate(Leaf, spawnPos, Quaternion.identity);
         HasSpawned = true;
     }
 
@@ -106,6 +114,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdateScoreText()
+    {
+        
+    }
+
+    private void OnDrawGizmos()
     {
         
     }
