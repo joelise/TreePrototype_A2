@@ -15,11 +15,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Plane plane = new Plane(Vector3.up, Vector3.zero);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float distance;
+
+        if (plane.Raycast(ray, out distance))
+       {
+           Vector3 worldPos = ray.GetPoint(distance);
+            transform.position = new Vector3(worldPos.x, transform.position.y, transform.position.z);
+        }
        
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
 
-        transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
 
 
         WrapScreen();
