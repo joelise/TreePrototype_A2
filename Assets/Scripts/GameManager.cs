@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     public Transform playerTransform;
     public float InnerRadius = 2f;
     public float OuterRadius = 2f;
-    
-    
+
+    public float Difficulty = 1f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Difficulty += Time.deltaTime * 0.05f;       // Slowly increases difficulty
+
         if (Alive)
         {
             float delay = 3f;
