@@ -65,6 +65,11 @@ public class GameManager : MonoBehaviour
             UI.Show();
             Time.timeScale = 0;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
        
         
 
