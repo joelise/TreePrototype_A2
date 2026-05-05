@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public float Difficulty = 1f;
 
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -60,10 +60,13 @@ public class GameManager : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
+            Time.timeScale = 0;
+
             Alive = false;
+            Cursor.visible = true;
             GameEnd();
             UI.Show();
-            Time.timeScale = 0;
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -116,6 +119,7 @@ public class GameManager : MonoBehaviour
         //UpdateScoreText();
         Destroy(leaf, 0.15f);
         //Debug.Log("Plus 1");
+       
     
     }
 

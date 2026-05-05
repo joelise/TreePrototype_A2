@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public GameManager gameManager;
-
+    public ScoreUiBasket basketUI;
+    public LeafTrigger trigger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,24 +16,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.Alive == true)
+        {
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float distance;
 
-        Plane plane = new Plane(Vector3.up, Vector3.zero);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float distance;
+            if (plane.Raycast(ray, out distance))
+            {
+                Vector3 worldPos = ray.GetPoint(distance);
+                transform.position = new Vector3(worldPos.x, transform.position.y, transform.position.z);
+            }
 
-        if (plane.Raycast(ray, out distance))
-       {
-           Vector3 worldPos = ray.GetPoint(distance);
-            transform.position = new Vector3(worldPos.x, transform.position.y, transform.position.z);
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+            //transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+
+
+            WrapScreen();
         }
-       
-        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-
-        //transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
-
-
-        WrapScreen();
 
     }
 
@@ -55,8 +59,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Leaf"))
         {
+            
             gameManager.CaughtLeaf(other.gameObject);
-            Debug.Log("Caught");
+            //Debug.Log("Caught");
 
         }
     }
