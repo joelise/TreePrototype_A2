@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
         Score++;
         //UpdateScoreText();
         Destroy(leaf, 0.15f);
-        Debug.Log("Plus 1");
+        //Debug.Log("Plus 1");
     
     }
 
