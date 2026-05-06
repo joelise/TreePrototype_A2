@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
 
     public float Difficulty = 1f;
 
-    
+    public GameObject PauseMenu;
+    public bool IsPaused = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -71,10 +72,17 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            TogglePause();
         }
        
-        
+        if (IsPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
 
     }
 
@@ -128,9 +136,13 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
+    public void TogglePause()
     {
-        
+
+        IsPaused = !IsPaused;
+        PauseMenu.SetActive(!PauseMenu.activeSelf);
+
+
     }
 
 }
